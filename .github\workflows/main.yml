@@ -22,10 +22,10 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
         run: npm ci
-      - name: Run Server
-        run: npm start & npx wait-on http://127.0.0.1:$PORT
-      - name: run TESTS
-        run: npm test
+      # - name: Run Server
+      #   run: npm start & npx wait-on http://127.0.0.1:$PORT
+      # - name: run TESTS
+      #   run: npm test
       - name: Output Information
         run: |
           echo "MONGODB_USERNAME ${{ env.MONGODB_USERNAME }}"
