@@ -1,5 +1,5 @@
 name: CI
-on: [push, workflow_dispatch]
+on: [push,workflow_dispatch]
 jobs:
   test:
     env:
@@ -11,26 +11,31 @@ jobs:
     steps:
       - name: get code
         uses: actions/checkout@v3
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
+      - name: Install NodeJs
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: cache dependencies
-        uses: actions/cache@v3
+      - name: Cache dependencies
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
-        run: npm ci
+        run: npm ci 
       # - name: Run Server
       #   run: npm start & npx wait-on http://127.0.0.1:$PORT
       # - name: run TESTS
       #   run: npm test
       - name: Output Information
         run: |
-          echo "MONGODB_USERNAME ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: 
+      - name: Output Information
+        run: |
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+        
+
