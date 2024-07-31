@@ -8,13 +8,15 @@ jobs:
       MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
+    container:
+      image: node:16 
     steps:
       - name: get code
         uses: actions/checkout@v3
-      - name: Install NodeJs
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # - name: Install NodeJs
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
