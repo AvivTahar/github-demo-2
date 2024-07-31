@@ -30,12 +30,12 @@ jobs:
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
   deploy:
+    env:
+      MONGODB_DB_NAME: ${{ vars.MONGODB_DB_NAME }}
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output Information
         run: |
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_USERNAME: ${{ steps.test.env.MONGODB_USERNAME }}"
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
-        
-
